@@ -12,12 +12,17 @@ from os.path import expanduser
 import argparse, os, string
 import numpy as np
 from scipy.io.wavfile import write as wav_write
+import soundfile as sf
 import tensorflow as tf
 
 def save_wav(save_path, f_s, wav):
 	if isinstance(wav[0], np.float32): wav = np.asarray(np.multiply(wav, 32768.0), dtype=np.int16)
 	wav_write(save_path, f_s, wav)
 
+def read_wav(path):
+	wav, f_s = sf.read(path, dtype='int16')
+	return wav, f_s
+	
 def log10(x):
     numerator = tf.log(x)
     denominator = tf.constant(np.log(10), dtype=numerator.dtype)
