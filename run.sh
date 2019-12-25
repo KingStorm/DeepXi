@@ -29,6 +29,7 @@ get_free_gpu () {
 				return $i
 			fi
 		done
+		echo 'Waiting for free GPU.'
 		sleep 10s
 	done
 }
